@@ -1,0 +1,16 @@
+{
+  "meta": { "lang": "zh", "dir": "ltr", "name": "中文" },
+  "nav": { "features": "功能", "demo": "演示", "import": "导入CSV", "dashboard": "仪表盘", "github": "GitHub" },
+  "hero": { "badge": "隐私优先 • 100% 离线", "title": "您的个人财务助手", "subtitle": "导入银行CSV文件，自动分类支出，预测未来3个月现金流 — 完全在浏览器中运行，数据不会离开您的设备。", "ctaImport": "导入CSV", "ctaDemo": "试用演示", "ctaCli": "了解更多", "stats": { "predictions": "3个月", "categories": "13个类别", "languages": "7种语言", "privacy": "100%私密" } },
+  "features": { "title": "您所需要的一切", "subtitle": "尊重隐私的强大财务工具", "csv": { "title": "CSV导入", "desc": "自动检测各国银行CSV格式。" }, "categories": { "title": "智能分类", "desc": "自动将交易分为13个类别。" }, "forecast": { "title": "现金流预测", "desc": "使用Holt-Winters指数平滑法预测收支。" }, "charts": { "title": "交互式图表", "desc": "支出模式的精美可视化。" }, "privacy": { "title": "隐私优先", "desc": "所有数据保留在您的设备上。" }, "pwa": { "title": "离线可用", "desc": "安装为PWA，无需网络即可使用。" } },
+  "import": { "title": "导入数据", "subtitle": "拖放银行CSV文件", "dropTitle": "将CSV拖到这里或点击浏览", "dropSubtitle": "支持大多数银行CSV格式", "demoBtn": "加载演示数据", "parsing": "解析CSV...", "categorizing": "分类中...", "saving": "保存中...", "forecasting": "运行预测模型...", "complete": "完成！" },
+  "dashboard": { "title": "仪表盘", "totalIncome": "总收入", "totalExpenses": "总支出", "netFlow": "净现金流", "savingsRate": "储蓄率", "export": "导出", "clear": "清除", "back": "← 返回", "exported": "数据已导出", "cleared": "数据已清除", "confirmClear": "确定要清除所有数据吗？" },
+  "charts": { "incomeExpense": "收入 vs 支出", "categoryBreakdown": "分类支出", "cashFlowForecast": "现金流预测", "income": "收入", "expenses": "支出", "actualFlow": "实际现金流", "predicted": "预测", "upperBound": "上限 (95%)", "lowerBound": "下限 (95%)" },
+  "forecast": { "title": "3个月预测", "income": "收入", "expenses": "支出", "method": "方法", "confidence": "置信度" },
+  "recommendations": { "title": "建议" },
+  "transactions": { "title": "最近交易", "date": "日期", "description": "描述", "category": "类别", "amount": "金额" },
+  "categories": { "housing": "住房", "food": "餐饮", "transport": "交通", "utilities": "公用事业", "entertainment": "娱乐", "shopping": "购物", "health": "健康", "subscriptions": "订阅", "education": "教育", "transfer": "转账", "salary": "工资", "freelance": "自由职业", "investment": "投资", "other": "其他" },
+  "rec": { "expenseRising": "您的支出呈上升趋势。", "lowSavings": "您的储蓄率低于10%。", "greatSavings": "出色的储蓄率！", "negativeFlow": "现金流可能变为负数。", "emergencyFund": "建立3个月支出的应急基金。" },
+  "errors": { "invalidFile": "请上传CSV文件", "noTransactions": "未找到有效交易", "demoFailed": "加载演示数据失败" },
+  "footer": { "desc": "开源个人财务助手。数据永远不会离开您的设备。", "links": "链接", "resources": "资源", "license": "MIT许可证", "madeWith": "为财务自由而作 ♥" }
+}

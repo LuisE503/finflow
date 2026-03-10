@@ -1,0 +1,17 @@
+{
+  "name": "finflow",
+  "version": "1.0.0",
+  "description": "Personal Finance Assistant with Cash Flow Prediction — PWA",
+  "private": false,
+  "license": "MIT",
+  "author": "LuisE503",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LuisE503/finflow.git"
+  },
+  "scripts": {
+    "dev": "npx serve site -p 3847",
+    "test": "npx serve tests -p 3848"
+  },
+  "keywords": ["finance", "budget", "cashflow", "prediction", "pwa", "csv", "ml"]
+}

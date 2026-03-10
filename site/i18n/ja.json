@@ -1,0 +1,16 @@
+{
+  "meta": { "lang": "ja", "dir": "ltr", "name": "日本語" },
+  "nav": { "features": "機能", "demo": "デモ", "import": "CSVインポート", "dashboard": "ダッシュボード", "github": "GitHub" },
+  "hero": { "badge": "プライバシー優先 • 100%オフライン", "title": "あなたの個人財務アシスタント", "subtitle": "銀行CSVをインポートし、支出を自動分類し、3ヶ月のキャッシュフローを予測 — すべてブラウザ内で完結。", "ctaImport": "CSVインポート", "ctaDemo": "デモを試す", "ctaCli": "詳しく見る", "stats": { "predictions": "3ヶ月", "categories": "13カテゴリ", "languages": "7言語", "privacy": "100%プライベート" } },
+  "features": { "title": "必要なすべてが揃っています", "subtitle": "プライバシーを尊重する強力な財務ツール", "csv": { "title": "CSVインポート", "desc": "各国の銀行CSVフォーマットを自動検出。" }, "categories": { "title": "スマート分類", "desc": "取引を13カテゴリに自動分類。" }, "forecast": { "title": "キャッシュフロー予測", "desc": "Holt-Winters指数平滑法で3ヶ月予測。" }, "charts": { "title": "インタラクティブチャート", "desc": "支出パターンの美しいビジュアライゼーション。" }, "privacy": { "title": "プライバシー優先", "desc": "すべてのデータはデバイス上に保持。" }, "pwa": { "title": "オフライン対応", "desc": "PWAとしてインストールし、ネットなしで使用。" } },
+  "import": { "title": "データをインポート", "subtitle": "銀行CSVファイルをドラッグ＆ドロップ", "dropTitle": "CSVをここにドロップまたはクリック", "dropSubtitle": "ほとんどの銀行CSVフォーマットに対応", "demoBtn": "デモデータを読み込む", "parsing": "CSV解析中...", "categorizing": "分類中...", "saving": "保存中...", "forecasting": "予測モデル実行中...", "complete": "完了！" },
+  "dashboard": { "title": "ダッシュボード", "totalIncome": "総収入", "totalExpenses": "総支出", "netFlow": "純キャッシュフロー", "savingsRate": "貯蓄率", "export": "エクスポート", "clear": "クリア", "back": "← 戻る", "exported": "データをエクスポートしました", "cleared": "データをクリアしました", "confirmClear": "すべてのデータを削除しますか？" },
+  "charts": { "incomeExpense": "収入 vs 支出", "categoryBreakdown": "カテゴリ別支出", "cashFlowForecast": "キャッシュフロー予測", "income": "収入", "expenses": "支出", "actualFlow": "実際のキャッシュフロー", "predicted": "予測", "upperBound": "上限 (95%)", "lowerBound": "下限 (95%)" },
+  "forecast": { "title": "3ヶ月予測", "income": "収入", "expenses": "支出", "method": "手法", "confidence": "信頼度" },
+  "recommendations": { "title": "推奨事項" },
+  "transactions": { "title": "最近の取引", "date": "日付", "description": "説明", "category": "カテゴリ", "amount": "金額" },
+  "categories": { "housing": "住居", "food": "食費", "transport": "交通費", "utilities": "光熱費", "entertainment": "娯楽", "shopping": "ショッピング", "health": "健康", "subscriptions": "サブスク", "education": "教育", "transfer": "振込", "salary": "給与", "freelance": "フリーランス", "investment": "投資", "other": "その他" },
+  "rec": { "expenseRising": "支出が増加傾向にあります。", "lowSavings": "貯蓄率が10%未満です。", "greatSavings": "素晴らしい貯蓄率です！", "negativeFlow": "キャッシュフローがマイナスになる可能性があります。", "emergencyFund": "3ヶ月分の支出をカバーする緊急資金を用意しましょう。" },
+  "errors": { "invalidFile": "CSVファイルをアップロードしてください", "noTransactions": "有効な取引が見つかりません", "demoFailed": "デモデータの読み込みに失敗" },
+  "footer": { "desc": "オープンソースの個人財務アシスタント。データはデバイスから離れません。", "links": "リンク", "resources": "リソース", "license": "MITライセンス", "madeWith": "経済的自由のために ♥ で制作" }
+}

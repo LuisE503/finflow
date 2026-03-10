@@ -1,0 +1,117 @@
+{
+  "meta": { "lang": "en", "dir": "ltr", "name": "English" },
+  "nav": {
+    "features": "Features",
+    "demo": "Try Demo",
+    "import": "Import CSV",
+    "dashboard": "Dashboard",
+    "github": "GitHub"
+  },
+  "hero": {
+    "badge": "Privacy-First • 100% Offline",
+    "title": "Your Personal Finance Assistant",
+    "subtitle": "Import your bank CSV, automatically categorize expenses, and predict your cash flow for the next 3 months — all in your browser, no data leaves your device.",
+    "ctaImport": "Import CSV",
+    "ctaDemo": "Try Demo",
+    "ctaCli": "Learn More",
+    "stats": { "predictions": "3 Months", "categories": "13 Categories", "languages": "7 Languages", "privacy": "100% Private" }
+  },
+  "features": {
+    "title": "Everything You Need",
+    "subtitle": "Powerful finance tools that respect your privacy",
+    "csv": { "title": "CSV Import", "desc": "Auto-detects bank CSV formats from any country. Supports US, EU, Latin American, and Asian date and number formats." },
+    "categories": { "title": "Smart Categorization", "desc": "Automatically classifies your transactions into 13 categories using multi-language keyword matching." },
+    "forecast": { "title": "Cash Flow Prediction", "desc": "Uses Holt-Winters exponential smoothing to forecast your income and expenses for the next 3 months with confidence intervals." },
+    "charts": { "title": "Interactive Charts", "desc": "Beautiful visualizations of your spending patterns, income trends, and predicted cash flow." },
+    "privacy": { "title": "Privacy First", "desc": "All data stays on your device. No servers, no accounts, no tracking. Uses IndexedDB for local storage." },
+    "pwa": { "title": "Works Offline", "desc": "Install as a Progressive Web App and use it without internet. Your financial data is always accessible." }
+  },
+  "import": {
+    "title": "Import Your Data",
+    "subtitle": "Drag and drop your bank CSV file",
+    "dropTitle": "Drop CSV here or click to browse",
+    "dropSubtitle": "Supports most bank CSV formats worldwide",
+    "demoBtn": "Load Demo Data",
+    "parsing": "Parsing CSV...",
+    "categorizing": "Categorizing transactions...",
+    "saving": "Saving data...",
+    "forecasting": "Running forecast model...",
+    "complete": "Complete!"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "totalIncome": "Total Income",
+    "totalExpenses": "Total Expenses",
+    "netFlow": "Net Cash Flow",
+    "savingsRate": "Savings Rate",
+    "export": "Export Data",
+    "clear": "Clear Data",
+    "back": "← Back",
+    "exported": "Data exported successfully",
+    "cleared": "All data cleared",
+    "confirmClear": "Are you sure you want to clear all data? This cannot be undone."
+  },
+  "charts": {
+    "incomeExpense": "Income vs Expenses",
+    "categoryBreakdown": "Spending by Category",
+    "cashFlowForecast": "Cash Flow Forecast",
+    "income": "Income",
+    "expenses": "Expenses",
+    "actualFlow": "Actual Cash Flow",
+    "predicted": "Predicted",
+    "upperBound": "Upper Bound (95%)",
+    "lowerBound": "Lower Bound (95%)"
+  },
+  "forecast": {
+    "title": "3-Month Forecast",
+    "income": "Income",
+    "expenses": "Expenses",
+    "method": "Method",
+    "confidence": "Confidence"
+  },
+  "recommendations": {
+    "title": "Recommendations"
+  },
+  "transactions": {
+    "title": "Recent Transactions",
+    "date": "Date",
+    "description": "Description",
+    "category": "Category",
+    "amount": "Amount"
+  },
+  "categories": {
+    "housing": "Housing",
+    "food": "Food & Dining",
+    "transport": "Transport",
+    "utilities": "Utilities",
+    "entertainment": "Entertainment",
+    "shopping": "Shopping",
+    "health": "Health",
+    "subscriptions": "Subscriptions",
+    "education": "Education",
+    "transfer": "Transfer",
+    "salary": "Salary",
+    "freelance": "Freelance",
+    "investment": "Investment",
+    "other": "Other"
+  },
+  "rec": {
+    "expenseRising": "Your expenses are trending upward. Consider reviewing discretionary spending.",
+    "lowSavings": "Your savings rate is below 10%. Aim for at least 20% to build a safety net.",
+    "greatSavings": "Excellent savings rate! Consider investing your surplus for long-term growth.",
+    "negativeFlow": "Cash flow may go negative soon. Plan ahead by cutting non-essential expenses.",
+    "emergencyFund": "Build an emergency fund covering 3 months of expenses."
+  },
+  "errors": {
+    "invalidFile": "Please upload a CSV file",
+    "noTransactions": "No valid transactions found in CSV",
+    "demoFailed": "Failed to load demo data"
+  },
+  "footer": {
+    "desc": "Open source personal finance assistant. Your data never leaves your device.",
+    "links": "Links",
+    "resources": "Resources",
+    "license": "Released under MIT License",
+    "madeWith": "Made with ♥ for financial freedom"
+  }
+}

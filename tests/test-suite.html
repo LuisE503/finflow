@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FinFlow Tests — CSV Parser, Categorizer, Forecaster</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #0a0f1a; color: #f1f5f9; padding: 2rem; }
+    h1 { color: #10b981; margin-bottom: 1.5rem; }
+    h2 { color: #94a3b8; margin-top: 2rem; }
+    .test { padding: 0.5rem 1rem; margin: 0.25rem 0; border-radius: 8px; font-family: monospace; }
+    .pass { background: rgba(16,185,129,0.15); border-left: 3px solid #10b981; }
+    .fail { background: rgba(239,68,68,0.15); border-left: 3px solid #ef4444; }
+    .summary { margin-top: 2rem; padding: 1rem; background: rgba(16,185,129,0.08); border-radius: 12px; border: 1px solid rgba(16,185,129,0.2); }
+    .summary.has-failures { background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.2); }
+  </style>
+</head>
+<body>
+  <h1>💰 FinFlow Test Suite</h1>
+  <div id="results"></div>
+  <div id="summary" class="summary"></div>
+
+  <script src="../site/js/csv-parser.js"></script>
+  <script src="../site/js/categorizer.js"></script>
+  <script src="../site/js/forecaster.js"></script>
+  <script>
+    const results = document.getElementById('results');
+    const summaryEl = document.getElementById('summary');
+    let passed = 0, failed = 0;
+
+    function assert(condition, name) {
+      if (condition) {
+        passed++;
+        results.innerHTML += `<div class="test pass">✓ ${name}</div>`;
+      } else {
+        failed++;
+        results.innerHTML += `<div class="test fail">✗ ${name}</div>`;
+      }
+    }
+
+    function section(name) {
+      results.innerHTML += `<h2>${name}</h2>`;
+    }
+
+    // ═══════════════════════════════════════
+    // CSV Parser Tests
+    // ═══════════════════════════════════════
+    section('CSV Parser');
+
+    // Test: parseAmount
+    assert(CSVParser.parseAmount('1,234.56') === 1234.56, 'parseAmount: US format 1,234.56');
+    assert(CSVParser.parseAmount('1.234,56') === 1234.56, 'parseAmount: EU format 1.234,56');
+    assert(CSVParser.parseAmount('(45.99)') === -45.99, 'parseAmount: parentheses negative (45.99)');
+    assert(CSVParser.parseAmount('-123.45') === -123.45, 'parseAmount: dash negative -123.45');
+    assert(CSVParser.parseAmount('$500.00') === 500.0, 'parseAmount: currency symbol $500.00');
+    assert(CSVParser.parseAmount('') === 0, 'parseAmount: empty string returns 0');
+
+    // Test: parseDate
+    assert(CSVParser.parseDate('2025-01-15') === '2025-01-15', 'parseDate: ISO format 2025-01-15');
+    assert(CSVParser.parseDate('15.01.2025') === '2025-01-15', 'parseDate: EU dot format 15.01.2025');
+    assert(CSVParser.parseDate('01/15/2025') === '2025-01-15', 'parseDate: US format 01/15/2025');
+    assert(CSVParser.parseDate('') === null, 'parseDate: empty string returns null');
+
+    // Test: full CSV parsing
+    const csv1 = `Date,Description,Amount,Balance
+2025-01-01,Salary,4200.00,15000
+2025-01-05,Grocery,-87.32,14912.68
+2025-01-10,Netflix,-15.99,14896.69`;
+    const parsed1 = CSVParser.parse(csv1);
+    assert(parsed1.length === 3, 'parse: parsed 3 transactions');
+    assert(parsed1[0].amount === 4200, 'parse: first amount is 4200');
+    assert(parsed1[0].type === 'income', 'parse: positive amount = income');
+    assert(parsed1[1].amount === -87.32, 'parse: second amount is -87.32');
+    assert(parsed1[1].type === 'expense', 'parse: negative amount = expense');
+    assert(parsed1[0].date === '2025-01-01', 'parse: date parsed correctly');
+
+    // Test: semicolon delimiter
+    const csv2 = `Fecha;Concepto;Importe
+01/15/2025;Nómina;3500.00
+01/20/2025;Supermercado;-120.50`;
+    const parsed2 = CSVParser.parse(csv2);
+    assert(parsed2.length === 2, 'parse: semicolon delimiter works');
+    assert(parsed2[0].amount === 3500, 'parse: semicolon amount correct');
+
+    // Test: credit/debit columns
+    const csv3 = `Date,Description,Credit,Debit
+2025-01-01,Salary,4200.00,
+2025-01-05,Grocery,,87.32`;
+    const parsed3 = CSVParser.parse(csv3);
+    assert(parsed3.length === 2, 'parse: credit/debit columns parsed');
+    assert(parsed3[0].amount === 4200, 'parse: credit column = positive');
+    assert(parsed3[1].amount === -87.32, 'parse: debit column = negative');
+
+    // ═══════════════════════════════════════
+    // Categorizer Tests
+    // ═══════════════════════════════════════
+    section('Categorizer');
+
+    assert(Categorizer.categorize({ description: 'Walmart Grocery', amount: -50 }) === 'food', 'categorize: Walmart → food');
+    assert(Categorizer.categorize({ description: 'Netflix Subscription', amount: -15 }) === 'entertainment', 'categorize: Netflix → entertainment');
+    assert(Categorizer.categorize({ description: 'Apartment Rent', amount: -1200 }) === 'housing', 'categorize: Rent → housing');
+    assert(Categorizer.categorize({ description: 'Shell Gas Station', amount: -50 }) === 'transport', 'categorize: Gas → transport');
+    assert(Categorizer.categorize({ description: 'Electric Bill', amount: -90 }) === 'utilities', 'categorize: Electric → utilities');
+    assert(Categorizer.categorize({ description: 'Salary Deposit', amount: 4200, type: 'income' }) === 'salary', 'categorize: Salary → salary');
+    assert(Categorizer.categorize({ description: 'Amazon Purchase', amount: -35 }) === 'shopping', 'categorize: Amazon → shopping');
+    assert(Categorizer.categorize({ description: 'CVS Pharmacy', amount: -20 }) === 'health', 'categorize: Pharmacy → health');
+    assert(Categorizer.categorize({ description: 'Spotify Premium', amount: -10 }) === 'entertainment', 'categorize: Spotify → entertainment');
+    assert(Categorizer.categorize({ description: 'Supermercado', amount: -80 }) === 'food', 'categorize: Supermercado (ES) → food');
+    assert(Categorizer.categorize({ description: 'Alquiler', amount: -800 }) === 'housing', 'categorize: Alquiler (ES) → housing');
+
+    // Test: categorizeAll
+    const txs = [
+      { description: 'Grocery', amount: -50 },
+      { description: 'Salary', amount: 4000, type: 'income' }
+    ];
+    const categorized = Categorizer.categorizeAll(txs);
+    assert(categorized[0].category === 'food', 'categorizeAll: assigns category');
+    assert(categorized[1].category === 'salary', 'categorizeAll: income categorized');
+
+    // Test: getMonthlyTotals
+    const txsMonthly = [
+      { date: '2025-01-01', amount: 4000, type: 'income', category: 'salary' },
+      { date: '2025-01-15', amount: -500, type: 'expense', category: 'food' },
+      { date: '2025-02-01', amount: 4000, type: 'income', category: 'salary' },
+      { date: '2025-02-20', amount: -600, type: 'expense', category: 'housing' },
+    ];
+    const monthly = Categorizer.getMonthlyTotals(txsMonthly);
+    assert(monthly.length === 2, 'getMonthlyTotals: 2 months');
+    assert(monthly[0].income === 4000, 'getMonthlyTotals: Jan income');
+    assert(monthly[0].expenses === 500, 'getMonthlyTotals: Jan expenses');
+
+    // ═══════════════════════════════════════
+    // Forecaster Tests
+    // ═══════════════════════════════════════
+    section('Forecaster');
+
+    // Test: SMA
+    const sma3 = Forecaster.sma([10, 20, 30, 40, 50], 3);
+    assert(sma3[2] === 20, 'SMA: window 3 at index 2 = 20');
+    assert(sma3[4] === 40, 'SMA: window 3 at index 4 = 40');
+
+    // Test: Exponential Smoothing
+    const es = Forecaster.exponentialSmoothing([100, 110, 120, 130], 0.5);
+    assert(es[0] === 100, 'expSmoothing: first value = first data');
+    assert(es[1] === 105, 'expSmoothing: alpha=0.5 step 1 = 105');
+
+    // Test: Linear Regression
+    const lr = Forecaster.linearRegression([100, 200, 300, 400, 500]);
+    assert(lr.slope === 100, 'linearRegression: slope = 100');
+    assert(lr.intercept === 100, 'linearRegression: intercept = 100');
+
+    // Test: MAPE
+    const mapeVal = Forecaster.mape([100, 200, 300], [110, 190, 310]);
+    assert(mapeVal > 0 && mapeVal < 10, 'MAPE: reasonable for small errors');
+
+    // Test: Holt Smoothing
+    const holt = Forecaster.holtSmoothing([100, 120, 140, 160, 180], 0.3, 0.1);
+    assert(holt.level.length === 5, 'holtSmoothing: level array length');
+    assert(holt.trend.length === 5, 'holtSmoothing: trend array length');
+    assert(holt.fitted.length === 5, 'holtSmoothing: fitted array length');
+
+    // Test: Full forecast
+    const monthlyDataForecast = [
+      { month: '2025-04', income: 5050, expenses: 1662, net: 3388 },
+      { month: '2025-05', income: 4850, expenses: 1650, net: 3200 },
+      { month: '2025-06', income: 4995, expenses: 1599, net: 3396 },
+      { month: '2025-07', income: 5250, expenses: 1827, net: 3423 },
+      { month: '2025-08', income: 5102, expenses: 1980, net: 3122 },
+      { month: '2025-09', income: 5150, expenses: 1613, net: 3537 },
+      { month: '2025-10', income: 5200, expenses: 1626, net: 3574 },
+      { month: '2025-11', income: 5358, expenses: 1962, net: 3396 },
+      { month: '2025-12', income: 7100, expenses: 2147, net: 4953 },
+      { month: '2026-01', income: 5300, expenses: 1589, net: 3711 },
+      { month: '2026-02', income: 5461, expenses: 1768, net: 3693 },
+      { month: '2026-03', income: 4500, expenses: 1412, net: 3088 }
+    ];
+    const forecastResult = Forecaster.forecast(monthlyDataForecast, 3);
+    assert(forecastResult.predictions.length === 3, 'forecast: 3 predictions generated');
+    assert(forecastResult.confidence > 0, 'forecast: confidence > 0');
+    assert(forecastResult.method !== '', 'forecast: method specified');
+    assert(forecastResult.predictions[0].income > 0, 'forecast: predicted income > 0');
+    assert(forecastResult.predictions[0].expenses > 0, 'forecast: predicted expenses > 0');
+    assert(forecastResult.predictions[0].confidence !== undefined, 'forecast: confidence intervals exist');
+    assert(forecastResult.recommendations.length > 0, 'forecast: recommendations generated');
+
+    // Regression test: income should be reasonable
+    assert(forecastResult.predictions[0].income > 3000 && forecastResult.predictions[0].income < 10000, 'regression: income in reasonable range');
+    assert(forecastResult.predictions[0].expenses > 500 && forecastResult.predictions[0].expenses < 5000, 'regression: expenses in reasonable range');
+
+    // Test: insufficient data
+    const emptyForecast = Forecaster.forecast([{ month: '2025-01', income: 100, expenses: 50, net: 50 }], 3);
+    assert(emptyForecast.predictions.length === 0, 'forecast: insufficient data returns empty');
+
+    // ═══════════════════════════════════════
+    // Summary
+    // ═══════════════════════════════════════
+    const total = passed + failed;
+    const hasFailures = failed > 0;
+    summaryEl.classList.toggle('has-failures', hasFailures);
+    summaryEl.innerHTML = `<h2 style="margin-top:0;">Test Results</h2>` +
+      `<p><strong>${passed}</strong> passed · <strong>${failed}</strong> failed · <strong>${total}</strong> total</p>` +
+      `<p style="font-size:2rem;margin:0;">${hasFailures ? '❌' : '✅'}</p>`;
+  </script>
+</body>
+</html>

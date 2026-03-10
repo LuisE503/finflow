@@ -1,0 +1,33 @@
+{
+  "meta": { "lang": "es", "dir": "ltr", "name": "Español" },
+  "nav": { "features": "Características", "demo": "Probar Demo", "import": "Importar CSV", "dashboard": "Panel", "github": "GitHub" },
+  "hero": {
+    "badge": "Privacidad Primero • 100% Sin Conexión",
+    "title": "Tu Asistente de Finanzas Personales",
+    "subtitle": "Importa tu CSV bancario, clasifica gastos automáticamente y predice tu flujo de efectivo para los próximos 3 meses — todo en tu navegador, sin enviar datos.",
+    "ctaImport": "Importar CSV",
+    "ctaDemo": "Probar Demo",
+    "ctaCli": "Más Información",
+    "stats": { "predictions": "3 Meses", "categories": "13 Categorías", "languages": "7 Idiomas", "privacy": "100% Privado" }
+  },
+  "features": {
+    "title": "Todo lo que Necesitas",
+    "subtitle": "Herramientas financieras poderosas que respetan tu privacidad",
+    "csv": { "title": "Importar CSV", "desc": "Detecta automáticamente formatos CSV bancarios de cualquier país. Soporta formatos de fecha y número de EE.UU., Europa, Latinoamérica y Asia." },
+    "categories": { "title": "Categorización Inteligente", "desc": "Clasifica automáticamente tus transacciones en 13 categorías usando coincidencia de palabras clave multiidioma." },
+    "forecast": { "title": "Predicción de Flujo de Efectivo", "desc": "Usa suavizado exponencial Holt-Winters para pronosticar tus ingresos y gastos por 3 meses con intervalos de confianza." },
+    "charts": { "title": "Gráficos Interactivos", "desc": "Visualizaciones hermosas de tus patrones de gasto, tendencias de ingresos y flujo de efectivo proyectado." },
+    "privacy": { "title": "Privacidad Primero", "desc": "Todos los datos se quedan en tu dispositivo. Sin servidores, sin cuentas, sin rastreo. Usa IndexedDB para almacenamiento local." },
+    "pwa": { "title": "Funciona Sin Conexión", "desc": "Instala como PWA y úsala sin internet. Tus datos financieros siempre están accesibles." }
+  },
+  "import": { "title": "Importa tus Datos", "subtitle": "Arrastra y suelta tu archivo CSV bancario", "dropTitle": "Suelta un CSV aquí o haz clic para buscar", "dropSubtitle": "Soporta la mayoría de formatos CSV bancarios", "demoBtn": "Cargar Datos Demo", "parsing": "Analizando CSV...", "categorizing": "Categorizando transacciones...", "saving": "Guardando datos...", "forecasting": "Ejecutando modelo de predicción...", "complete": "¡Completado!" },
+  "dashboard": { "title": "Panel", "totalIncome": "Ingreso Total", "totalExpenses": "Gastos Totales", "netFlow": "Flujo Neto", "savingsRate": "Tasa de Ahorro", "export": "Exportar Datos", "clear": "Borrar Datos", "back": "← Volver", "exported": "Datos exportados exitosamente", "cleared": "Todos los datos borrados", "confirmClear": "¿Estás seguro de que quieres borrar todos los datos? Esto no se puede deshacer." },
+  "charts": { "incomeExpense": "Ingresos vs Gastos", "categoryBreakdown": "Gastos por Categoría", "cashFlowForecast": "Pronóstico de Flujo", "income": "Ingresos", "expenses": "Gastos", "actualFlow": "Flujo Real", "predicted": "Predicción", "upperBound": "Límite Superior (95%)", "lowerBound": "Límite Inferior (95%)" },
+  "forecast": { "title": "Pronóstico a 3 Meses", "income": "Ingresos", "expenses": "Gastos", "method": "Método", "confidence": "Confianza" },
+  "recommendations": { "title": "Recomendaciones" },
+  "transactions": { "title": "Transacciones Recientes", "date": "Fecha", "description": "Descripción", "category": "Categoría", "amount": "Monto" },
+  "categories": { "housing": "Vivienda", "food": "Comida", "transport": "Transporte", "utilities": "Servicios", "entertainment": "Entretenimiento", "shopping": "Compras", "health": "Salud", "subscriptions": "Suscripciones", "education": "Educación", "transfer": "Transferencia", "salary": "Salario", "freelance": "Freelance", "investment": "Inversión", "other": "Otro" },
+  "rec": { "expenseRising": "Tus gastos están en tendencia alcista. Considera revisar gastos discrecionales.", "lowSavings": "Tu tasa de ahorro está por debajo del 10%. Apunta a al menos 20%.", "greatSavings": "¡Excelente tasa de ahorro! Considera invertir tu excedente.", "negativeFlow": "El flujo de efectivo podría ser negativo pronto. Planifica recortando gastos no esenciales.", "emergencyFund": "Construye un fondo de emergencia para cubrir 3 meses de gastos." },
+  "errors": { "invalidFile": "Por favor sube un archivo CSV", "noTransactions": "No se encontraron transacciones válidas", "demoFailed": "Error al cargar datos demo" },
+  "footer": { "desc": "Asistente financiero de código abierto. Tus datos nunca salen de tu dispositivo.", "links": "Enlaces", "resources": "Recursos", "license": "Licencia MIT", "madeWith": "Hecho con ♥ para la libertad financiera" }
+}

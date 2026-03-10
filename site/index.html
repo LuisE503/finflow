@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinFlow — Personal Finance Assistant</title>
+  <meta name="description" content="Import your bank CSV, auto-categorize expenses, and predict cash flow for 3 months — all in your browser, 100% private.">
+  <meta name="keywords" content="finance, budget, cashflow, prediction, pwa, csv, personal finance, expense tracker">
+  <meta name="author" content="LuisE503">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://LuisE503.github.io/finflow/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FinFlow — Personal Finance Assistant">
+  <meta property="og:description" content="Import your bank CSV, auto-categorize expenses, and predict cash flow for the next 3 months.">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es_ES">
+  <meta property="og:locale:alternate" content="fr_FR">
+  <meta property="og:locale:alternate" content="de_DE">
+  <meta property="og:locale:alternate" content="pt_BR">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:locale:alternate" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FinFlow — Personal Finance Assistant">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"FinFlow","applicationCategory":"FinanceApplication","operatingSystem":"Any","description":"Personal Finance Assistant with Cash Flow Prediction","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"license":"https://opensource.org/licenses/MIT"}
+  </script>
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#10b981">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💰</text></svg>" type="image/svg+xml">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ═══ Navigation ═══ -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <a href="#" class="nav-logo" aria-label="FinFlow Home">
+        <span class="icon" aria-hidden="true">💰</span>
+        <span class="text">FinFlow</span>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="#features" data-i18n="nav.features">Features</a>
+        <a href="#import" data-i18n="nav.import">Import CSV</a>
+        <a href="https://github.com/LuisE503/finflow" target="_blank" rel="noopener" data-i18n="nav.github">GitHub</a>
+        <div class="lang-switcher">
+          <button class="lang-btn" aria-label="Change language">🌐 EN</button>
+          <div class="lang-dropdown" role="menu">
+            <button class="lang-option active" data-lang="en" role="menuitem">🇺🇸 English</button>
+            <button class="lang-option" data-lang="es" role="menuitem">🇪🇸 Español</button>
+            <button class="lang-option" data-lang="fr" role="menuitem">🇫🇷 Français</button>
+            <button class="lang-option" data-lang="de" role="menuitem">🇩🇪 Deutsch</button>
+            <button class="lang-option" data-lang="pt" role="menuitem">🇧🇷 Português</button>
+            <button class="lang-option" data-lang="zh" role="menuitem">🇨🇳 中文</button>
+            <button class="lang-option" data-lang="ja" role="menuitem">🇯🇵 日本語</button>
+          </div>
+        </div>
+        <button id="pwa-install-btn" class="nav-cta" style="display:none;">Install App</button>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    </div>
+  </nav>
+
+  <!-- ═══ Landing View ═══ -->
+  <div id="landing-view">
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-badge" data-i18n="hero.badge">Privacy-First • 100% Offline</span>
+          <h1 data-i18n="hero.title">Your Personal Finance Assistant</h1>
+          <p class="hero-subtitle" data-i18n="hero.subtitle">Import your bank CSV, automatically categorize expenses, and predict your cash flow for the next 3 months — all in your browser, no data leaves your device.</p>
+          <div class="hero-actions">
+            <a href="#import" class="btn btn-primary" data-i18n="hero.ctaImport">Import CSV</a>
+            <button id="load-demo-btn" class="btn btn-secondary" data-i18n="hero.ctaDemo">Try Demo</button>
+            <a href="#features" class="btn btn-ghost" data-i18n="hero.ctaCli">Learn More</a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat"><div class="value" data-i18n="hero.stats.predictions">3 Months</div><div class="label">Forecast</div></div>
+            <div class="hero-stat"><div class="value" data-i18n="hero.stats.categories">13 Categories</div><div class="label">Auto-detect</div></div>
+            <div class="hero-stat"><div class="value" data-i18n="hero.stats.languages">7 Languages</div><div class="label">i18n</div></div>
+            <div class="hero-stat"><div class="value" data-i18n="hero.stats.privacy">100% Private</div><div class="label">No servers</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main id="main-content">
+      <!-- Features -->
+      <section class="section" id="features">
+        <div class="container">
+          <div class="section-header animate-in">
+            <h2 data-i18n="features.title">Everything You Need</h2>
+            <p data-i18n="features.subtitle">Powerful finance tools that respect your privacy</p>
+          </div>
+          <div class="features-grid">
+            <div class="feature-card animate-in"><div class="feature-icon" aria-hidden="true">📂</div><h3 data-i18n="features.csv.title">CSV Import</h3><p data-i18n="features.csv.desc">Auto-detects bank CSV formats from any country. Supports US, EU, Latin American, and Asian date and number formats.</p></div>
+            <div class="feature-card animate-in"><div class="feature-icon" aria-hidden="true">🏷️</div><h3 data-i18n="features.categories.title">Smart Categorization</h3><p data-i18n="features.categories.desc">Automatically classifies your transactions into 13 categories using multi-language keyword matching.</p></div>
+            <div class="feature-card animate-in"><div class="feature-icon" aria-hidden="true">📈</div><h3 data-i18n="features.forecast.title">Cash Flow Prediction</h3><p data-i18n="features.forecast.desc">Uses Holt-Winters exponential smoothing to forecast your income and expenses for the next 3 months with confidence intervals.</p></div>
+            <div class="feature-card animate-in"><div class="feature-icon" aria-hidden="true">📊</div><h3 data-i18n="features.charts.title">Interactive Charts</h3><p data-i18n="features.charts.desc">Beautiful visualizations of your spending patterns, income trends, and predicted cash flow.</p></div>
+            <div class="feature-card animate-in"><div class="feature-icon" aria-hidden="true">🔒</div><h3 data-i18n="features.privacy.title">Privacy First</h3><p data-i18n="features.privacy.desc">All data stays on your device. No servers, no accounts, no tracking. Uses IndexedDB for local storage.</p></div>
+            <div class="feature-card animate-in"><div class="feature-icon" aria-hidden="true">📱</div><h3 data-i18n="features.pwa.title">Works Offline</h3><p data-i18n="features.pwa.desc">Install as a Progressive Web App and use it without internet. Your financial data is always accessible.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Import Section -->
+      <section class="section import-section" id="import">
+        <div class="container">
+          <div class="section-header animate-in">
+            <h2 data-i18n="import.title">Import Your Data</h2>
+            <p data-i18n="import.subtitle">Drag and drop your bank CSV file</p>
+          </div>
+          <div id="drop-zone" class="drop-zone animate-in" role="button" tabindex="0" aria-label="Upload CSV file">
+            <span class="icon" aria-hidden="true">📂</span>
+            <div class="title" data-i18n="import.dropTitle">Drop CSV here or click to browse</div>
+            <div class="subtitle" data-i18n="import.dropSubtitle">Supports most bank CSV formats worldwide</div>
+            <input type="file" id="csv-file-input" accept=".csv,text/csv" aria-hidden="true">
+          </div>
+          <div id="import-progress" class="import-progress">
+            <div class="spinner"></div>
+            <p id="import-status" data-i18n="import.parsing">Parsing CSV...</p>
+            <div class="progress-bar"><div class="fill"></div></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ═══ Dashboard View ═══ -->
+  <div id="dashboard-view" class="dashboard">
+    <section class="section" style="padding-top: calc(var(--nav-height) + var(--space-xl));">
+      <div class="container">
+        <!-- Dashboard Header -->
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-xl);flex-wrap:wrap;gap:var(--space-md);">
+          <div>
+            <button id="back-to-landing" class="btn btn-ghost" data-i18n="dashboard.back">← Back</button>
+            <h2 style="display:inline-block;margin-left:var(--space-md);" data-i18n="dashboard.title">Dashboard</h2>
+          </div>
+          <div style="display:flex;gap:var(--space-sm);">
+            <button id="export-data-btn" class="btn btn-secondary" style="padding:var(--space-sm) var(--space-md);font-size:0.85rem;" data-i18n="dashboard.export">Export Data</button>
+            <button id="clear-data-btn" class="btn btn-ghost" style="padding:var(--space-sm) var(--space-md);font-size:0.85rem;color:var(--color-expense);" data-i18n="dashboard.clear">Clear Data</button>
+          </div>
+        </div>
+
+        <!-- Stat Cards -->
+        <div class="dashboard-grid">
+          <div class="stat-card"><div class="stat-label" data-i18n="dashboard.totalIncome">Total Income</div><div class="stat-value" id="stat-total-income" style="color:var(--color-income);">$0.00</div></div>
+          <div class="stat-card"><div class="stat-label" data-i18n="dashboard.totalExpenses">Total Expenses</div><div class="stat-value" id="stat-total-expenses" style="color:var(--color-expense);">$0.00</div></div>
+          <div class="stat-card"><div class="stat-label" data-i18n="dashboard.netFlow">Net Cash Flow</div><div class="stat-value" id="stat-net-flow">$0.00</div></div>
+          <div class="stat-card"><div class="stat-label" data-i18n="dashboard.savingsRate">Savings Rate</div><div class="stat-value" id="stat-savings-rate" style="color:var(--color-primary);">0%</div></div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="charts-row">
+          <div class="chart-container"><h3 data-i18n="charts.incomeExpense">Income vs Expenses</h3><canvas id="chart-income-expense" height="300"></canvas></div>
+          <div class="chart-container"><h3 data-i18n="charts.categoryBreakdown">Spending by Category</h3><canvas id="chart-categories" height="300"></canvas></div>
+        </div>
+
+        <!-- Forecast Chart -->
+        <div class="chart-container"><h3 data-i18n="charts.cashFlowForecast">Cash Flow Forecast</h3><canvas id="chart-forecast" height="300"></canvas></div>
+
+        <!-- Predictions -->
+        <div class="prediction-card">
+          <h3>📈 <span data-i18n="forecast.title">3-Month Forecast</span></h3>
+          <div id="predictions-container"></div>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="prediction-card">
+          <h3>💡 <span data-i18n="recommendations.title">Recommendations</span></h3>
+          <div id="recommendations-container" class="recommendations"></div>
+        </div>
+
+        <!-- Transactions Table -->
+        <div class="chart-container" style="overflow-x:auto;">
+          <h3 data-i18n="transactions.title">Recent Transactions</h3>
+          <table class="transactions-table">
+            <thead>
+              <tr>
+                <th data-i18n="transactions.date">Date</th>
+                <th data-i18n="transactions.description">Description</th>
+                <th data-i18n="transactions.category">Category</th>
+                <th data-i18n="transactions.amount">Amount</th>
+              </tr>
+            </thead>
+            <tbody id="transactions-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══ Footer ═══ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><div class="logo"><span aria-hidden="true">💰</span><span class="text">FinFlow</span></div><p data-i18n="footer.desc">Open source personal finance assistant. Your data never leaves your device.</p></div>
+        <div class="footer-col"><h4 data-i18n="footer.links">Links</h4><a href="#features" data-i18n="nav.features">Features</a><a href="#import" data-i18n="nav.import">Import CSV</a><a href="https://github.com/LuisE503/finflow" target="_blank" rel="noopener" data-i18n="nav.github">GitHub</a></div>
+        <div class="footer-col"><h4 data-i18n="footer.resources">Resources</h4><a href="https://github.com/LuisE503/finflow" target="_blank" rel="noopener">Source Code</a><a href="https://www.investopedia.com/terms/c/cashflow.asp" target="_blank" rel="noopener">Cash Flow Guide</a></div>
+      </div>
+      <div class="footer-bottom">
+        <span data-i18n="footer.license">Released under MIT License</span>
+        <span data-i18n="footer.madeWith">Made with ♥ for financial freedom</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="./js/i18n.js"></script>
+  <script src="./js/csv-parser.js"></script>
+  <script src="./js/categorizer.js"></script>
+  <script src="./js/forecaster.js"></script>
+  <script src="./js/charts.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
